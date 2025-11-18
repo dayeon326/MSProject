@@ -124,7 +124,7 @@ fun WrongNoteScreenPreview() {
             wrongQuestions = listOf(
                 Question(
                     id = 1,
-                    category = QuizCategory.GENERAL,
+                    category = QuizCategory.CULTURE,
                     text = "프리뷰 예시 문제입니다.",
                     options = listOf("1번", "2번", "3번", "4번"),
                     answerIndex = 0
