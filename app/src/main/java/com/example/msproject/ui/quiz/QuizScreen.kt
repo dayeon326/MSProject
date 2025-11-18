@@ -279,9 +279,107 @@ private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
             Question(
                 id = 201,
                 category = category,
-                text = "",
-                options = listOf(),
-                answerIndex = 2
+                text = "영화 '겨울왕국'에서 엘사가 부른 유명한 주제곡은?",
+                options = listOf("Let It Go", "곰 세 마리", "작은 별", "아리랑"),
+                answerIndex = 0 // Let It Go [cite: 122, 123]
+            ),
+            Question(
+                id = 202,
+                category = category,
+                text = "봉준호 감독이 만드신 영화는?",
+                options = listOf("아리랑", "곰 세 마리", "아이언맨", "기생충"),
+                answerIndex = 3 // 기생충 [cite: 127, 131]
+            ),
+            Question(
+                id = 203,
+                category = category,
+                text = "아이언맨 영화의 주인공 이름은?",
+                options = listOf("다니엘", "토니 스타크", "샘", "윌 스미스"),
+                answerIndex = 1 // 토니 스타크 [cite: 132, 134]
+            ),
+            Question(
+                id = 204,
+                category = category,
+                text = "헐크 영화의 주인공 이름은?",
+                options = listOf("다니엘", "루이", "토니 스타크", "브루스 배너"),
+                answerIndex = 3 // 브루스 배너 [cite: 137, 141]
+            ),
+            Question(
+                id = 205,
+                category = category,
+                text = "영화 '해리 포터' 시리즈에서 마법을 배우는 학생들이 다니는 학교의 이름은?",
+                options = listOf("킹스 칼리지", "옥스퍼드", "캠브리지", "호그와트"),
+                answerIndex = 3 // 호그와트 [cite: 142, 146]
+            ),
+            Question(
+                id = 206,
+                category = category,
+                text = "마블의 슈퍼 히어로 팀 이름은 무엇인가요?",
+                options = listOf("저스티스 리그", "판타스틱 4", "어벤져스", "엑스맨"),
+                answerIndex = 2 // 어벤져스 [cite: 147, 150]
+            ),
+            Question(
+                id = 207,
+                category = category,
+                text = "영화 '스타워즈'에서 '내가 네 아버지다'라는 명대사를 남긴 악당은?",
+                options = listOf("요다", "루크 스카이워커", "한 솔로", "다스 베이더"),
+                answerIndex = 3 // 다스 베이더 [cite: 152, 156]
+            ),
+            Question(
+                id = 208,
+                category = category,
+                text = "영화 '매트릭스' 시리즈의 주인공 이름은 무엇인가요?",
+                options = listOf("모피어스", "네오", "트리니티", "스미스 요원"),
+                answerIndex = 1 // 네오 [cite: 157, 159]
+            ),
+            Question(
+                id = 209,
+                category = category,
+                text = "2012년 '강남스타일' 노래와 '말춤'으로 전 세계적인 인기를 얻은 가수는?",
+                options = listOf("비", "싸이", "유재석", "아이유"),
+                answerIndex = 1 // 싸이 [cite: 162, 164]
+            ),
+            Question(
+                id = 210,
+                category = category,
+                text = "영화 '라이온 킹'의 주인공 심바는 어떤 동물인가요?",
+                options = listOf("호랑이", "사자", "코끼리", "하이에나"),
+                answerIndex = 1 // 사자 [cite: 167, 169]
+            ),
+            Question(
+                id = 211,
+                category = category,
+                text = "'스파이더맨'은 어떤 동물과 관련된 능력을 가지고 있나요?",
+                options = listOf("박쥐", "거미", "개미", "독수리"),
+                answerIndex = 1 // 거미 [cite: 172, 174]
+            ),
+            Question(
+                id = 212,
+                category = category,
+                text = "다음 중 손가락으로 눌러서 소리를 내는 악기는?",
+                options = listOf("피아노", "트럼펫", "바이올린", "드럼"),
+                answerIndex = 0 // 피아노 [cite: 177, 178]
+            ),
+            Question(
+                id = 213,
+                category = category,
+                text = "어벤져스 히어로 중, 초록색 거인으로 변하는 캐릭터는?",
+                options = listOf("아이언맨", "헐크", "토르", "스파이더맨"),
+                answerIndex = 1 // 헐크 [cite: 182, 184]
+            ),
+            Question(
+                id = 214,
+                category = category,
+                text = "영화 '극한직업'은 주인공들이 경찰이지만 무엇을 팔았나요?",
+                options = listOf("커피", "치킨", "떡볶이", "빵"),
+                answerIndex = 1 // 치킨 [cite: 187, 189]
+            ),
+            Question(
+                id = 215,
+                category = category,
+                text = "2024년에 개봉한 픽사 애니메이션으로, '기쁨', '슬픔' 등이 나오는 영화는?",
+                options = listOf("엘리멘탈", "인사이드 아웃", "쿵푸팬더 4", "업"),
+                answerIndex = 1 // 인사이드 아웃 [cite: 192, 194]
             )
         )
 
@@ -289,9 +387,107 @@ private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
             Question(
                 id = 301,
                 category = category,
-                text ="",
-                options = listOf(),
-                answerIndex = 0
+                text = "1년은 총 며칠인가요?",
+                options = listOf("100일", "255일", "365일", "1000일"),
+                answerIndex = 2 // 365일 [cite: 46, 49]
+            ),
+            Question(
+                id = 302,
+                category = category,
+                text = "대한민국의 수도는 어디인가요?",
+                options = listOf("부산", "서울", "인천", "대구"),
+                answerIndex = 1 // 서울 [cite: 51, 53]
+            ),
+            Question(
+                id = 303,
+                category = category,
+                text = "10월 9일, 한글날은 누구를 기념하는 날인가요?",
+                options = listOf("이순신 장군", "세종대왕", "유관순 열사", "안중근 의사"),
+                answerIndex = 1 // 세종대왕 [cite: 56, 58]
+            ),
+            Question(
+                id = 304,
+                category = category,
+                text = "불이 났을 때 전화해야 하는 번호는?",
+                options = listOf("112", "119", "120", "131"),
+                answerIndex = 1 // 119 [cite: 61, 63]
+            ),
+            Question(
+                id = 305,
+                category = category,
+                text = "경찰과 관련있는 전화번호는?",
+                options = listOf("112", "119", "120", "131"),
+                answerIndex = 0 // 112 [cite: 66, 67]
+            ),
+            Question(
+                id = 306,
+                category = category,
+                text = "해가 뜨는 쪽은 어느 쪽인가요?",
+                options = listOf("동쪽", "서쪽", "남쪽", "북쪽"),
+                answerIndex = 0 // 동쪽 [cite: 71, 72]
+            ),
+            Question(
+                id = 307,
+                category = category,
+                text = "거북선을 만들어 왜군을 물리친 조선 시대 장군은?",
+                options = listOf("김유신", "을지문덕", "이순신", "강감찬"),
+                answerIndex = 2 // 이순신 [cite: 76, 79]
+            ),
+            Question(
+                id = 308,
+                category = category,
+                text = "8월 15일은 무슨날일까요?",
+                options = listOf("삼일절", "제헌절", "광복절", "개천절"),
+                answerIndex = 2 // 광복절 [cite: 81, 84]
+            ),
+            Question(
+                id = 309,
+                category = category,
+                text = "우리나라의 국기 이름은?",
+                options = listOf("애국가", "무궁화", "태극기", "한글"),
+                answerIndex = 2 // 태극기 [cite: 86, 89]
+            ),
+            Question(
+                id = 310,
+                category = category,
+                text = "1년 12달 중, 날짜 수가 가장 적은 달은?",
+                options = listOf("1월", "2월", "7월", "12월"),
+                answerIndex = 1 // 2월 [cite: 91, 93]
+            ),
+            Question(
+                id = 311,
+                category = category,
+                text = "어린이날은 몇 월 며칠인가요?",
+                options = listOf("3월 3일", "5월 5일", "6월 6일", "8월 15일"),
+                answerIndex = 1 // 5월 5일 [cite: 96, 98]
+            ),
+            Question(
+                id = 312,
+                category = category,
+                text = "물을 얼리면 무엇이 되나요?",
+                options = listOf("수증기", "얼음", "이슬", "소금"),
+                answerIndex = 1 // 얼음 [cite: 101, 103]
+            ),
+            Question(
+                id = 313,
+                category = category,
+                text = "우리나라의 국화(나라꽃)는 무엇인가요?",
+                options = listOf("진달래", "개나리", "무궁화", "장미"),
+                answerIndex = 2 // 무궁화 [cite: 106, 109]
+            ),
+            Question(
+                id = 314,
+                category = category,
+                text = "하루는 총 몇 시간으로 이루어져 있나요?",
+                options = listOf("12시간", "20시간", "24시간", "30시간"),
+                answerIndex = 2 // 24시간 [cite: 111, 114]
+            ),
+            Question(
+                id = 315,
+                category = category,
+                text = "고구려, 백제, 신라 세 나라가 있던 시대를 무엇이라고 부르나요?",
+                options = listOf("조선 시대", "고려 시대", "통일 신라 시대", "삼국 시대"),
+                answerIndex = 3 // 삼국 시대 [cite: 116, 120]
             )
         )
     }
