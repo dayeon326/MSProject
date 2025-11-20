@@ -11,12 +11,18 @@ import com.example.msproject.model.Question
 import com.example.msproject.model.QuizCategory
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.msproject.ui.theme.MSProjectTheme
+import android.media.MediaPlayer
+import androidx.compose.ui.platform.LocalContext
+import com.example.msproject.R
 
 @Composable
 fun QuizScreen(
     category: QuizCategory,
     onQuizFinished: (score: Int, wrongQuestions: List<Question>, totalQuestions: Int) -> Unit
 ) {
+    // [추가 1] 소리를 재생하려면 'Context'가 필요합니다.
+    val context = LocalContext.current
+
     // 선택된 카테고리의 문제 리스트
     val questions = remember(category) { getQuestionsForCategory(category) }
 
@@ -24,6 +30,21 @@ fun QuizScreen(
     var currentIndex by remember { mutableStateOf(0) }
     var score by remember { mutableStateOf(0) }
     val wrongList = remember { mutableStateListOf<Question>() }
+
+    // [추가 2] 소리 재생 함수 만들기 (함수 안에 함수를 넣습니다)
+    fun playSound(isCorrect: Boolean) {
+        // 정답이면 correct_sound, 오답이면 wrong_sound (파일명 확인 필수!)
+        val soundResId = if (isCorrect) R.raw.correct_sound else R.raw.wrong_sound
+
+        // 미디어 플레이어 생성 및 시작
+        val mediaPlayer = MediaPlayer.create(context, soundResId)
+        mediaPlayer?.start()
+
+        // 소리가 다 끝나면 메모리 청소
+        mediaPlayer?.setOnCompletionListener { mp ->
+            mp.release()
+        }
+    }
 
     // 모든 문제를 다 풀었으면 콜백 호출
     if (currentIndex >= questions.size) {
@@ -70,8 +91,12 @@ fun QuizScreen(
         question.options.forEachIndexed { index, optionText ->
             Button(
                 onClick = {
+                    // [추가 3] 정답인지 먼저 판단하고 소리 내기!
+                    val isCorrect = (index == question.answerIndex)
+                    playSound(isCorrect) // 소리 재생!
+
                     // 정답 체크
-                    if (index == question.answerIndex) {
+                    if (isCorrect) {
                         score += 10   // 문제당 10점
                     } else {
                         wrongList.add(question)
@@ -88,7 +113,6 @@ fun QuizScreen(
         }
     }
 }
-
 //answerIndex 표기 e.g.정답이 2번 보기일 시 값은 1(인덱스 0부터 시작)
 private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
     return when (category) {
@@ -492,6 +516,9 @@ private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
         )
     }
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable

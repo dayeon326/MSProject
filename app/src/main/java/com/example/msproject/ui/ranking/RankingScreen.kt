@@ -117,7 +117,7 @@ fun RankingScreenPreview() {
         RankingScreen(
             rankingList = listOf(
                 ScoreRecord(
-                    category = QuizCategory.GENERAL,
+                    category = QuizCategory.CULTURE,
                     score = 90,
                     dateTime = System.currentTimeMillis()
                 ),

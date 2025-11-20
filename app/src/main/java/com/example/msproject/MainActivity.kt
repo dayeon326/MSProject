@@ -53,10 +53,10 @@ class MainActivity : ComponentActivity() {
                                 backStackEntry.arguments?.getString("category")
                             val category = try {
                                 QuizCategory.valueOf(
-                                    categoryName ?: QuizCategory.GENERAL.name
+                                    categoryName ?: QuizCategory.CULTURE.name
                                 )
                             } catch (e: IllegalArgumentException) {
-                                QuizCategory.GENERAL
+                                QuizCategory.CULTURE
                             }
 
                             QuizScreen(
