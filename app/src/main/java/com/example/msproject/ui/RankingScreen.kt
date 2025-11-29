@@ -1,4 +1,4 @@
-package com.example.msproject.ui.ranking
+package com.example.msproject.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

@@ -12,11 +12,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.msproject.model.QuizCategory
 import com.example.msproject.model.QuizRepository
-import com.example.msproject.ui.main.MainScreen
-import com.example.msproject.ui.quiz.QuizScreen
-import com.example.msproject.ui.result.ResultScreen
-import com.example.msproject.ui.ranking.RankingScreen
-import com.example.msproject.ui.wrongnote.WrongNoteScreen
+import com.example.msproject.ui.MainScreen
+import com.example.msproject.ui.QuizScreen
+import com.example.msproject.ui.ResultScreen
+import com.example.msproject.ui.RankingScreen
+import com.example.msproject.ui.WrongNoteScreen
 import com.example.msproject.ui.theme.MSProjectTheme  // ← 프로젝트에 맞게 이름 확인!
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.msproject.ui.wrongnote
+package com.example.msproject.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

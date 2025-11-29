@@ -1,4 +1,4 @@
-package com.example.msproject.ui.quiz
+package com.example.msproject.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
