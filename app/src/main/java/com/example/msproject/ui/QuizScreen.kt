@@ -1,5 +1,6 @@
 package com.example.msproject.ui
 
+import androidx.compose.foundation.Image // 이미지 넣기 위해 추가
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -12,104 +13,135 @@ import com.example.msproject.model.QuizCategory
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.msproject.ui.theme.MSProjectTheme
 import android.media.MediaPlayer
+import androidx.compose.ui.layout.ContentScale // 배경 꽉 채우기 위해 추가
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource // 이미지 리소스 불러오기 위해 추가
 import com.example.msproject.R
+import androidx.compose.ui.Alignment
 
 @Composable
 fun QuizScreen(
     category: QuizCategory,
     onQuizFinished: (score: Int, wrongQuestions: List<Question>, totalQuestions: Int) -> Unit
 ) {
-    // [추가 1] 소리를 재생하려면 'Context'가 필요합니다.
     val context = LocalContext.current
 
-    // 선택된 카테고리의 문제 리스트
+    // 배경 설정
+    val backgroundImageRes = when (category) {
+        QuizCategory.CULTURE -> R.drawable.christmas_bg
+        else -> R.drawable.christmas_bg
+    }
+
     val questions = remember(category) { getQuestionsForCategory(category) }
 
-    // 현재 문제 인덱스, 점수, 오답 목록 상태
     var currentIndex by remember { mutableStateOf(0) }
     var score by remember { mutableStateOf(0) }
     val wrongList = remember { mutableStateListOf<Question>() }
 
-    // [추가 2] 소리 재생 함수 만들기 (함수 안에 함수를 넣습니다)
-    fun playSound(isCorrect: Boolean) {
-        // 정답이면 correct_sound, 오답이면 wrong_sound (파일명 확인 필수!)
-        val soundResId = if (isCorrect) R.raw.correct_sound else R.raw.wrong_sound
+    // 버건디 색상 정의 (진한 와인색)
+    val burgundyColor = androidx.compose.ui.graphics.Color(0xFFA03040)
 
-        // 미디어 플레이어 생성 및 시작
+    fun playSound(isCorrect: Boolean) {
+        val soundResId = if (isCorrect) R.raw.correct_sound else R.raw.wrong_sound
         val mediaPlayer = MediaPlayer.create(context, soundResId)
         mediaPlayer?.start()
-
-        // 소리가 다 끝나면 메모리 청소
-        mediaPlayer?.setOnCompletionListener { mp ->
-            mp.release()
-        }
+        mediaPlayer?.setOnCompletionListener { mp -> mp.release() }
     }
 
-    // 모든 문제를 다 풀었으면 콜백 호출
     if (currentIndex >= questions.size) {
         LaunchedEffect(Unit) {
             onQuizFinished(score, wrongList.toList(), questions.size)
         }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text("결과 화면으로 이동 중...")
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(id = backgroundImageRes),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+                alpha = 0.3f
+            )
+            Column(
+                modifier = Modifier.fillMaxSize().padding(24.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally // 가로 중앙 정렬
+            ) {
+                Text("결과 화면으로 이동 중...")
+            }
         }
         return
     }
 
     val question = questions[currentIndex]
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Top
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        // 상단: 문제 번호
-        Text(
-            text = "문제 ${currentIndex + 1} / ${questions.size}",
-            style = MaterialTheme.typography.titleMedium
+        // 1. 배경 이미지
+        Image(
+            painter = painterResource(id = backgroundImageRes),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+            alpha = 0.3f
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        // 2. 퀴즈 내용
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally // 가로 중앙 정렬 추가
+        ) {
+            // [상단] 문제 번호 (맨 위에 고정)
+            Text(
+                text = "문제 ${currentIndex + 1} / ${questions.size}",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.align(Alignment.Start) // 왼쪽 정렬 유지
+            )
 
-        // 문제 내용
-        Text(
-            text = question.text,
-            style = MaterialTheme.typography.titleLarge
-        )
+            // [중요] 위쪽 여백을 유동적으로 주어 내용을 중앙으로 밈
+            Spacer(modifier = Modifier.weight(1f))
 
-        Spacer(modifier = Modifier.height(24.dp))
+            // [중앙] 문제 내용
+            Text(
+                text = question.text,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center // 텍스트 가운데 정렬
+            )
 
-        // 보기 4개 버튼
-        question.options.forEachIndexed { index, optionText ->
-            Button(
-                onClick = {
-                    // [추가 3] 정답인지 먼저 판단하고 소리 내기!
-                    val isCorrect = (index == question.answerIndex)
-                    playSound(isCorrect) // 소리 재생!
+            // [수정] 문제와 버튼 사이 간격 넓힘 (24dp -> 48dp)
+            Spacer(modifier = Modifier.height(48.dp))
 
-                    // 정답 체크
-                    if (isCorrect) {
-                        score += 10   // 문제당 10점
-                    } else {
-                        wrongList.add(question)
-                    }
-                    // 다음 문제로
-                    currentIndex++
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp)
-            ) {
-                Text(optionText)
+            // [중앙] 버튼들
+            question.options.forEachIndexed { index, optionText ->
+                Button(
+                    onClick = {
+                        val isCorrect = (index == question.answerIndex)
+                        playSound(isCorrect)
+
+                        if (isCorrect) {
+                            score += 10
+                        } else {
+                            wrongList.add(question)
+                        }
+                        currentIndex++
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp)
+                        .height(56.dp), // 버튼 높이 약간 키움 (터치하기 편하게)
+                    // [수정] 버튼 색상을 버건디로 변경
+                    colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = burgundyColor,
+                        contentColor = androidx.compose.ui.graphics.Color.White
+                    )
+                ) {
+                    Text(text = optionText, style = MaterialTheme.typography.bodyLarge)
+                }
             }
+
+            // [중요] 아래쪽 여백을 유동적으로 주어 내용을 중앙으로 받쳐줌
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }

@@ -1,70 +1,108 @@
 package com.example.msproject.ui
 
+import androidx.compose.foundation.Image // 이미지 추가
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults // 버튼 색상용 추가
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color // 색상 정의용 추가
+import androidx.compose.ui.layout.ContentScale // 배경 꽉 채우기
+import androidx.compose.ui.res.painterResource // 리소스 불러오기
+import androidx.compose.ui.text.font.FontWeight // 글씨 두께용 추가
 import androidx.compose.ui.unit.dp
 import com.example.msproject.model.Question
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.msproject.ui.theme.MSProjectTheme
 import com.example.msproject.model.QuizCategory
+import com.example.msproject.R // R 파일 임포트 필수
+
 @Composable
 fun WrongNoteScreen(
     wrongQuestions: List<Question>, // 틀린 문제 리스트
     onBackToMain: () -> Unit        // 메인으로 돌아가기
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp)
-    ) {
+    // [색상 정의] 퀴즈 화면과 동일한 연한 버건디
+    val burgundyColor = Color(0xFFA03040)
 
-        // 상단 제목
-        Text(
-            text = "오답 노트",
-            style = MaterialTheme.typography.headlineMedium
+    // [구조 변경] Box로 감싸서 배경 이미지 적용
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        // 1. 배경 이미지
+        Image(
+            painter = painterResource(id = R.drawable.christmas_bg),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+            alpha = 0.3f
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        // 2. 오답 노트 내용
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp)
+        ) {
 
-        if (wrongQuestions.isEmpty()) {
-            // 틀린 문제가 하나도 없을 때
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("틀린 문제가 없습니다! 🎉")
-            }
-        } else {
-            // 틀린 문제 목록
-            LazyColumn(
-                modifier = Modifier.weight(1f)
-            ) {
-                itemsIndexed(wrongQuestions) { index, question ->
-                    WrongQuestionItem(
-                        index = index + 1,
-                        question = question
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
+            // 상단 제목 [수정됨]
+            Text(
+                text = "오답 노트",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold // 두껍게
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            if (wrongQuestions.isEmpty()) {
+                // 틀린 문제가 하나도 없을 때
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("틀린 문제가 없습니다! 🎉")
+                }
+            } else {
+                // 틀린 문제 목록
+                LazyColumn(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    itemsIndexed(wrongQuestions) { index, question ->
+                        WrongQuestionItem(
+                            index = index + 1,
+                            question = question,
+                            highlightColor = burgundyColor // 정답 색상 전달
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
                 }
             }
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = onBackToMain,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("메인으로 돌아가기")
+            // 메인으로 돌아가기 버튼 [수정됨]
+            Button(
+                onClick = onBackToMain,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = burgundyColor, // 버건디색 적용
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = "메인으로 돌아가기",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }
@@ -72,7 +110,8 @@ fun WrongNoteScreen(
 @Composable
 private fun WrongQuestionItem(
     index: Int,
-    question: Question
+    question: Question,
+    highlightColor: Color // [추가] 색상을 인자로 받음
 ) {
     Column(
         modifier = Modifier
@@ -81,7 +120,8 @@ private fun WrongQuestionItem(
     ) {
         Text(
             text = "Q$index. ${question.text}",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold // 문제 제목도 살짝 두껍게
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -108,10 +148,12 @@ private fun WrongQuestionItem(
             else -> "-"
         }
 
+        // 정답 표시 [수정됨]
         Text(
             text = "정답: $correctLabel",
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary
+            color = highlightColor, // 전달받은 버건디색 적용
+            fontWeight = FontWeight.Bold // 정답은 잘 보이게 두껍게
         )
     }
 }
