@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MSProjectTheme {   // ← 여기 Theme 이름 프로젝트에 맞게 수정
+            MSProjectTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -38,7 +38,6 @@ class MainActivity : ComponentActivity() {
                         composable("main") {
                             MainScreen(
                                 onCategorySelected = { category ->
-                                    // 선택한 카테고리 이름을 경로에 넣어서 전달
                                     navController.navigate("quiz/${category.name}")
                                 },
                                 onRankingClick = {
@@ -62,7 +61,6 @@ class MainActivity : ComponentActivity() {
                             QuizScreen(
                                 category = category,
                                 onQuizFinished = { score, wrongQuestions, totalQuestions ->
-                                    // 결과를 저장소에 저장
                                     QuizRepository.saveResult(
                                         category = category,
                                         score = score,

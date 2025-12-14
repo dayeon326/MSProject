@@ -30,7 +30,7 @@ fun MainScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFFDECCE))   // 🔹 배경색 (원하는 색코드로 조정)
+            .background(Color(0xFFFDECCE))
     ) {
         Text(
             text = "Tap a decoration to navigate!",
@@ -43,14 +43,13 @@ fun MainScreen(
                 .padding(top = 120.dp)
         )
 
-        // 🔹 트리 + 장식 버튼 레이어 (비율 고정 박스)
+        // 🔹 트리 + 장식 버튼 레이어
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .fillMaxWidth(0.7f)     // 가로 비율
-                .aspectRatio(0.7f)      // 트리 비율 (필요하면 0.6f ~ 0.8f 사이로 조절)
+                .fillMaxWidth(0.7f)
+                .aspectRatio(0.7f)
         ) {
-            // 트리 이미지
             Image(
                 painter = painterResource(id = R.drawable.tree1),
                 contentDescription = null,
@@ -59,18 +58,16 @@ fun MainScreen(
             )
 
 
-            // ⭐ 랭킹 (트리 꼭대기)
             Image(
                 painter = painterResource(id = R.drawable.star),
                 contentDescription = "Ranking",
                 modifier = Modifier
                     .size(90.dp)
                     .align(Alignment.TopCenter)
-                    .offset(y = 1.dp)          // 살짝 내려서 트리 꼭대기에 붙이기
+                    .offset(y = 1.dp)
                     .clickable { onRankingClick() }
             )
 
-// 🔵 문화&음식 (왼쪽 가지)
             Image(
                 painter = painterResource(id = R.drawable.ornament1),
                 contentDescription = "Christmas Culture & Food Quiz",
@@ -81,7 +78,6 @@ fun MainScreen(
                     .clickable { onCategorySelected(QuizCategory.CULTURE) }
             )
 
-// 🟢 영화&음악 (오른쪽 가지)
             Image(
                 painter = painterResource(id = R.drawable.ornament2),
                 contentDescription = "Movies & Music Quiz",
@@ -92,7 +88,6 @@ fun MainScreen(
                     .clickable { onCategorySelected(QuizCategory.MOVIE) }
             )
 
-// 🔴 일반 상식&역사 (아래 쪽)
             Image(
                 painter = painterResource(id = R.drawable.ornament3),
                 contentDescription = "General Knowledge & Histor",

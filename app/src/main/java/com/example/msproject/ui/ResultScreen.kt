@@ -28,10 +28,8 @@ fun ResultScreen(
     onGoMain: () -> Unit,    // 메인 화면으로
     onGoWrongNote: () -> Unit // 오답 노트로
 ) {
-    // [색상 정의] 퀴즈 화면과 동일한 연한 버건디
     val burgundyColor = Color(0xFFA03040)
 
-    // [구조 변경] Box로 감싸서 배경 이미지 적용
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -50,7 +48,7 @@ fun ResultScreen(
                 .fillMaxSize()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center // 화면 정중앙 배치
+            verticalArrangement = Arrangement.Center
         ) {
 
             Text(
@@ -63,7 +61,7 @@ fun ResultScreen(
 
             Text(
                 text = "최종 점수 : ${score}점",
-                style = MaterialTheme.typography.headlineSmall, // 점수는 좀 더 크게
+                style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
                 color = burgundyColor // 점수에 포인트 컬러
             )
@@ -82,7 +80,7 @@ fun ResultScreen(
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            // [버튼 1] 오답 노트 보기 (채워진 버건디 버튼)
+            // [버튼 1] 오답 노트 보기
             Button(
                 onClick = onGoWrongNote,
                 modifier = Modifier
@@ -98,13 +96,12 @@ fun ResultScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // [버튼 2] 메인으로 돌아가기 (테두리만 있는 버튼)
+            // [버튼 2] 메인으로 돌아가기
             OutlinedButton(
                 onClick = onGoMain,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                // 글씨색과 테두리색을 버건디로 변경
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = burgundyColor
                 ),

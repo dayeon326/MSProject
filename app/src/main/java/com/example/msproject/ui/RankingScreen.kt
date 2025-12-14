@@ -31,8 +31,8 @@ fun RankingScreen(
     onBack: () -> Unit
 ) {
     // [색상 정의]
-    val burgundyColor = Color(0xFFA03040) // 퀴즈 화면과 동일한 연한 버건디
-    val goldYellowColor = Color(0xFFE0A800) // 랭킹 제목용 노란색
+    val burgundyColor = Color(0xFFA03040)
+    val goldYellowColor = Color(0xFFE0A800)
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -53,12 +53,12 @@ fun RankingScreen(
                 .padding(24.dp)
         ) {
 
-            // 상단 제목 [수정됨]
+
             Text(
                 text = "랭킹",
                 style = MaterialTheme.typography.headlineMedium,
-                color = goldYellowColor, // 노란색 적용
-                fontWeight = FontWeight.Bold // 두껍게 적용
+                color = goldYellowColor,
+                fontWeight = FontWeight.Bold
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -90,14 +90,13 @@ fun RankingScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 뒤로가기 버튼 [수정됨]
             Button(
                 onClick = onBack,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp), // 버튼 높이도 퀴즈 화면과 맞춤
+                    .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = burgundyColor, // 버건디색 적용
+                    containerColor = burgundyColor,
                     contentColor = Color.White
                 )
             ) {

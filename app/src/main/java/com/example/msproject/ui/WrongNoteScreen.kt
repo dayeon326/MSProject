@@ -27,10 +27,8 @@ fun WrongNoteScreen(
     wrongQuestions: List<Question>, // 틀린 문제 리스트
     onBackToMain: () -> Unit        // 메인으로 돌아가기
 ) {
-    // [색상 정의] 퀴즈 화면과 동일한 연한 버건디
     val burgundyColor = Color(0xFFA03040)
 
-    // [구조 변경] Box로 감싸서 배경 이미지 적용
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -50,11 +48,11 @@ fun WrongNoteScreen(
                 .padding(24.dp)
         ) {
 
-            // 상단 제목 [수정됨]
+            // 상단 제목
             Text(
                 text = "오답 노트",
                 style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold // 두껍게
+                fontWeight = FontWeight.Bold
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -78,7 +76,7 @@ fun WrongNoteScreen(
                         WrongQuestionItem(
                             index = index + 1,
                             question = question,
-                            highlightColor = burgundyColor // 정답 색상 전달
+                            highlightColor = burgundyColor
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                     }
@@ -87,14 +85,14 @@ fun WrongNoteScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 메인으로 돌아가기 버튼 [수정됨]
+            // 메인으로 돌아가기 버튼
             Button(
                 onClick = onBackToMain,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = burgundyColor, // 버건디색 적용
+                    containerColor = burgundyColor,
                     contentColor = Color.White
                 )
             ) {
@@ -111,7 +109,7 @@ fun WrongNoteScreen(
 private fun WrongQuestionItem(
     index: Int,
     question: Question,
-    highlightColor: Color // [추가] 색상을 인자로 받음
+    highlightColor: Color
 ) {
     Column(
         modifier = Modifier
@@ -121,7 +119,7 @@ private fun WrongQuestionItem(
         Text(
             text = "Q$index. ${question.text}",
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold // 문제 제목도 살짝 두껍게
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -148,12 +146,12 @@ private fun WrongQuestionItem(
             else -> "-"
         }
 
-        // 정답 표시 [수정됨]
+        // 정답 표시
         Text(
             text = "정답: $correctLabel",
             style = MaterialTheme.typography.bodyMedium,
-            color = highlightColor, // 전달받은 버건디색 적용
-            fontWeight = FontWeight.Bold // 정답은 잘 보이게 두껍게
+            color = highlightColor,
+            fontWeight = FontWeight.Bold
         )
     }
 }

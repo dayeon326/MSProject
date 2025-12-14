@@ -1,6 +1,6 @@
 package com.example.msproject.ui
 
-import androidx.compose.foundation.Image // 이미지 넣기 위해 추가
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -13,9 +13,9 @@ import com.example.msproject.model.QuizCategory
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.msproject.ui.theme.MSProjectTheme
 import android.media.MediaPlayer
-import androidx.compose.ui.layout.ContentScale // 배경 꽉 채우기 위해 추가
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource // 이미지 리소스 불러오기 위해 추가
+import androidx.compose.ui.res.painterResource
 import com.example.msproject.R
 import androidx.compose.ui.Alignment
 
@@ -26,7 +26,7 @@ fun QuizScreen(
 ) {
     val context = LocalContext.current
 
-    // 배경 설정
+
     val backgroundImageRes = when (category) {
         QuizCategory.CULTURE -> R.drawable.christmas_bg
         else -> R.drawable.christmas_bg
@@ -38,7 +38,7 @@ fun QuizScreen(
     var score by remember { mutableStateOf(0) }
     val wrongList = remember { mutableStateListOf<Question>() }
 
-    // 버건디 색상 정의 (진한 와인색)
+
     val burgundyColor = androidx.compose.ui.graphics.Color(0xFFA03040)
 
     fun playSound(isCorrect: Boolean) {
@@ -63,7 +63,7 @@ fun QuizScreen(
             Column(
                 modifier = Modifier.fillMaxSize().padding(24.dp),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally // 가로 중앙 정렬
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text("결과 화면으로 이동 중...")
             }
@@ -90,29 +90,28 @@ fun QuizScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally // 가로 중앙 정렬 추가
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // [상단] 문제 번호 (맨 위에 고정)
+
             Text(
                 text = "문제 ${currentIndex + 1} / ${questions.size}",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.align(Alignment.Start) // 왼쪽 정렬 유지
+                modifier = Modifier.align(Alignment.Start)
             )
 
-            // [중요] 위쪽 여백을 유동적으로 주어 내용을 중앙으로 밈
+
             Spacer(modifier = Modifier.weight(1f))
 
-            // [중앙] 문제 내용
+
             Text(
                 text = question.text,
                 style = MaterialTheme.typography.titleLarge,
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center // 텍스트 가운데 정렬
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
 
-            // [수정] 문제와 버튼 사이 간격 넓힘 (24dp -> 48dp)
             Spacer(modifier = Modifier.height(48.dp))
 
-            // [중앙] 버튼들
+
             question.options.forEachIndexed { index, optionText ->
                 Button(
                     onClick = {
@@ -129,8 +128,8 @@ fun QuizScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 6.dp)
-                        .height(56.dp), // 버튼 높이 약간 키움 (터치하기 편하게)
-                    // [수정] 버튼 색상을 버건디로 변경
+                        .height(56.dp),
+
                     colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                         containerColor = burgundyColor,
                         contentColor = androidx.compose.ui.graphics.Color.White
@@ -140,12 +139,10 @@ fun QuizScreen(
                 }
             }
 
-            // [중요] 아래쪽 여백을 유동적으로 주어 내용을 중앙으로 받쳐줌
             Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
-//answerIndex 표기 e.g.정답이 2번 보기일 시 값은 1(인덱스 0부터 시작)
 private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
     return when (category) {
         QuizCategory.CULTURE -> listOf(
