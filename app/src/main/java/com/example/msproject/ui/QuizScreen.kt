@@ -436,7 +436,7 @@ private fun getQuestionsForCategory(category: QuizCategory): List<Question> {
             )
         )
 
-        QuizCategory.SCIENCE -> listOf(
+        QuizCategory.KNOWLEDGE -> listOf(
             Question(
                 id = 301,
                 category = category,
